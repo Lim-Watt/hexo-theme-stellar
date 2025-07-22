@@ -26,7 +26,7 @@
     .label
       color: white
       font-size: 12px
-      padding: 3px 6px 2px 6px
+      padding: 2px 6px
       margin: 4px 2px 0 2px
       line-height: 1
       border-radius: 16px
@@ -58,14 +58,15 @@
       font-weight: 500
       margin-top: 1rem
       max-width: 100%
+    .lazy-box
+      border-radius: 64px
+      floatable-trans()
     img
       object-fit: cover
       display: block
       width: 64px
       height: 64px
-      background: var(--card)
-      border-radius: 64px
-      floatable-trans()
+      
     
   .previews
     display: flex
@@ -89,7 +90,7 @@
         color: var(--block-border)
         top: 0
         content: '“'
-        left: -20px
+        left: -16px
         trans1 all
     .spacer
       height: 100%
@@ -111,14 +112,16 @@
         position: absolute
         left: -12px
         top: 2px
-        height: $fs-14
+        height: 'calc(%s - 2px)' % $fs-14
         width: 4px
         border-radius: 4px
         background: var(--block-border)
-        trans2 background height
+        trans1 all
       &:hover:before
-        background: $color-hover
-        height: calc(100% - 4px)
+        background: var(--accent)
+        // height: calc(100% - 4px)
+        height: 100%
+        top: 0
       span 
         display: -webkit-box
         -webkit-box-orient: vertical
@@ -148,11 +151,11 @@
   &:hover
     .desc
       &:before
-        color: $color-hover
+        color: var(--accent)
         transform: scale(1.2) translateX(-4px)
   .card-link:hover
-    img
+    .lazy-box
       transform: scale(1.2) rotate(8deg)
       box-shadow: $boxshadow-card-float
   .post-link:hover
-    color: $color-hover
+    color: var(--accent)

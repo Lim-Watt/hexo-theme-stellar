@@ -3,14 +3,15 @@ utils.jq(() => {
     const els = document.getElementsByClassName('ds-sites');
     for (var i = 0; i < els.length; i++) {
       const el = els[i];
-      const api = el.getAttribute('api');
+      const api = el.dataset.api;
       if (api == null) {
         continue;
       }
       const default_avatar = def.avatar;
       const default_cover = def.cover;
       // layout
-      utils.request(el, api, function(data) {
+      utils.request(el, api, async resp => {
+        const data = await resp.json();
         for (let item of data.content) {
           var cell = `<div class="grid-cell site-card">`;
           cell += `<a class="card-link" target="_blank" rel="external nofollow noopener noreferrer" href="${item.url}">`;
@@ -35,6 +36,7 @@ utils.jq(() => {
           cell += `</div>`;
           $(el).find('.grid-box').append(cell);
         }
+        window.wrapLazyloadImages(el);
       });
     }
   });
